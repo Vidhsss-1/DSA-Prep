@@ -1,3 +1,8 @@
+
+//Problem: Two Sum (#1)
+// Approach: Use HashMap to store value-index pairs.
+// Time Complexity: O(n), Space: O(n)
+//changes
 import java.util.HashMap;
 
 public class TwoSum {
