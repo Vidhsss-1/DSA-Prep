@@ -13,4 +13,4 @@ If yes, return both indices.
 
 **Complexity:**
 - Time: O(n)
-- Space: O(n)
+- Space: O(n)s
