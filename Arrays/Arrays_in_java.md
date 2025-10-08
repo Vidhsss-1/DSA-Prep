@@ -1,100 +1,120 @@
-# 📘 Arrays in Java
+Arrays in Java
+1. Introduction
 
-Arrays are **fixed-size data structures** that store elements of the **same type** in contiguous memory locations.  
-They provide **fast access** to elements using indices (zero-based indexing).
+An array in Java is a linear data structure that allows you to store multiple values of the same type.
+Arrays are objects in Java and inherit from java.lang.Object. This allows access to methods like toString(), equals(), and hashCode().
 
----
+Each array has a built-in length property that gives the number of elements.
 
-## 🧠 1. Array Basics
+2. Key Features
 
-### 📌 Declaration
-```java
-int[] arr;        // Preferred way
-int arr2[];       // Also valid (less common)
+Store Primitives and Objects: Arrays can hold primitive types (int, char, boolean) and objects (String, Integer, custom objects).
 
-📌 Initialization
-arr = new int[5]; // Creates array of 5 integers, default 0s
+Contiguous Memory Allocation: Primitive types are stored contiguously; object references are stored contiguously.
 
-📌 Declaration + Initialization (together)
-int[] arr = {1, 2, 3, 4, 5};
+Zero-based Indexing: First element is at index 0.
 
-📌 Accessing Elements
-System.out.println(arr[0]); // prints 1
-arr[2] = 10;                // modifies element at index 2
+Fixed Length: Once created, size cannot be changed.
 
-⚙️ 2. Array Traversal
-Using for loop
+3. Declaration and Initialization
+Declaration
+int arr[];   // Method 1
+int[] arr;   // Method 2
+
+Initialization
+int arr[] = new int[5];          // Allocate memory
+int[] arr2 = {1, 2, 3, 4, 5};    // Array literal
+
+
+Note: Memory is allocated on the heap, and primitive types are initialized to 0, booleans to false, and objects to null.
+
+4. Access and Update
+arr[0] = 10;        // Update first element
+int first = arr[0]; // Access first element
+
+
+Length of array:
+
+int n = arr.length;
+
+5. Traversing Arrays
 for (int i = 0; i < arr.length; i++) {
     System.out.println(arr[i]);
 }
 
-Using for-each loop
-for (int num : arr) {
-    System.out.println(num);
+6. Arrays of Objects
+class Student {
+    int roll_no;
+    String name;
+    Student(int r, String n) { roll_no = r; name = n; }
 }
 
-🧩 3. Arrays as Parameters
+Student[] arr = new Student[5];
+arr[0] = new Student(1, "Aman");
 
-Arrays can be passed to methods by reference, meaning changes inside the method affect the original array.
+7. Array Exceptions
 
-public class PassArrayExample {
-    static void modifyArray(int[] a) {
-        a[0] = 100;
-    }
+Accessing an index outside [0, length-1] throws ArrayIndexOutOfBoundsException.
 
-    public static void main(String[] args) {
-        int[] arr = {1, 2, 3};
-        modifyArray(arr);
-        System.out.println(arr[0]); // Output: 100
-    }
+int[] arr = new int[3];
+System.out.println(arr[5]);  // ❌ Error
+
+8. Passing Arrays to Methods
+public static void sum(int[] arr) {
+    int total = 0;
+    for (int num : arr) total += num;
+    System.out.println(total);
 }
 
-🧰 4. Common Operations
-Operation	Example	Description
-Get length	arr.length	Number of elements
-Sort array	Arrays.sort(arr)	Sorts in ascending order
-Convert to string	Arrays.toString(arr)	Prints array nicely
-Copy array	Arrays.copyOf(arr, n)	Copies first n elements
+int[] arr = {1,2,3,4};
+sum(arr);
 
-🧩 Import required class:
-
-import java.util.Arrays;
-
-⚠️ 5. Common Mistakes
-Mistake	Explanation
-ArrayIndexOutOfBoundsException	Accessing invalid index (like arr[5] in size 5 array)
-Using arr.length()	Wrong — it’s a field, not a method (arr.length ✔)
-Forgetting to initialize array	Leads to NullPointerException
-🔄 6. Multi-Dimensional Arrays
-Example
-int[][] matrix = {
-    {1, 2, 3},
-    {4, 5, 6}
-};
-
-Traversal
-for (int i = 0; i < matrix.length; i++) {
-    for (int j = 0; j < matrix[i].length; j++) {
-        System.out.print(matrix[i][j] + " ");
-    }
-    System.out.println();
+9. Returning Arrays from Methods
+public static int[] getArray() {
+    return new int[]{1, 2, 3};
 }
+int[] arr = getArray();
 
-🧮 7. Utility Class – Arrays
+10. Advantages
 
-Java provides the java.util.Arrays class for easy array handling.
+Efficient Access: O(1) to access by index.
 
-Common Methods
-Arrays.sort(arr);             // Sorts array
-Arrays.equals(arr1, arr2);    // Compares arrays
-Arrays.copyOf(arr, newLen);   // Copies array
-Arrays.fill(arr, 0);          // Fills all elements with 0
+Memory Management: Fixed size simplifies memory handling.
 
-🧠 Summary
-Topic	Key Point
-Declaration	int[] arr = new int[5];
-Access	arr[i]
-Traversal	for / for-each loop
-Length	arr.length
-Library	java.util.Arrays
-Multi-dimensional	Nested arrays like int[][]
+Data Organization: Groups related elements.
+
+11. Disadvantages
+
+Fixed Size: Cannot grow or shrink dynamically.
+
+Homogeneity: Only stores elements of the same type.
+
+Insertion/Deletion Costly: Middle operations require shifting elements.
+
+12. Snippets
+
+All example programs are in the Arrays/snippets folder:
+
+File	Description
+ArrayTraversal.java	Traversing and printing arrays
+ArrayInitialization.java	Different ways to declare and initialize arrays
+ArrayUtilities.java	Array utility methods (sort, max, min, etc.)
+PassArrayToMethod.java	Passing arrays to methods and summing values
+MultiDimArray.java	Example of 2D arrays
+ObjectArrayExample.java	Working with arrays of objects
+
+Tip: You can run these directly in VS Code (click Run button).
+
+13. Repository Structure
+DSA-Prep/
+└─ Arrays/
+   ├─ Arrays_in_java.md       # This README/notes
+   ├─ snippets/               # Example programs/snippets
+   │   ├─ ArrayTraversal.java
+   │   ├─ ArrayInitialization.java
+   │   ├─ ArrayUtilities.java
+   │   ├─ PassArrayToMethod.java
+   │   ├─ MultiDimArray.java
+   │   └─ ObjectArrayExample.java
+   └─ problems/               # Solved array problems
+       └─ TwoSum.java
